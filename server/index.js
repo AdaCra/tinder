@@ -7,8 +7,7 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 require('dotenv').config()
 
-const uri = 'mongodb+srv://Adam:Hannath@cluster0.ycsk8gk.mongodb.net/app-data?retryWrites=true&w=majority'
-
+const uri = process.env.URI
 
 const app = express()
 app.use(cors())
@@ -42,7 +41,7 @@ app.post('/signup', async (req, res) => {
         const sanitisedEmail = email.toLowerCase()
 
         const data = {
-            user_is: generatedUserId,
+            user_id: generatedUserId,
             email: sanitisedEmail,
             hashed_password: hashedPassword
         }
@@ -53,7 +52,7 @@ app.post('/signup', async (req, res) => {
             expiresIn: 60 * 24
         })
 
-        res.status(201).json({ token })
+        res.status(201).json({ token, userId: generatedUserId })
     } catch (err) {
         console.log(err);
     } finally{
@@ -78,21 +77,16 @@ app.post('/login', async (req, res) => {
             const token = jwt.sign(user, email, { 
                 expiresIn: 60 * 24
             })
-            res.status(201).json({ token })
+            res.status(201).json({ token, userId: user.user_id })
         }
         res.status(400).send('Invalid Credentials')
     }
     catch (err) {
         console.log(err);
-
-    } finally{
-        await client.close()
-    }
+    } 
 })
 
-
-
-
+// Get all Users
 app.get('/users', async (req, res) => {
 
     const client = new MongoClient(uri)
@@ -108,6 +102,39 @@ app.get('/users', async (req, res) => {
         await client.close()
     }
 })
+
+// Update a User
+app.put('/user', async (req, res) => {
+    const client = new MongoClient(uri)
+    const formData = req.body.formData
+
+    try {
+        await client.connect()
+        const database = client.db('app-data')
+        const users = database.collection('users')
+
+        const query = {user_id: formData.user_id}
+        const updateDocument = {
+            $set: {
+                first_name: formData.first_name,
+                dob_day: formData.dob_day,
+                dob_month: formData.dob_month,
+                dob_year: formData.dob_year,
+                show_gender: formData.show_gender,
+                gender_identity: formData.gender_identity,
+                gender_interest: formData.gender_interest,
+                url: formData.url,
+                about: formData.about,
+                matches: formData.matches
+            },
+        }
+       const insertedUser = await users.updateOne(query, updateDocument)
+       res.send(insertedUser)        
+    }  finally {
+        await client.close()
+    }
+})
+
 
 app.listen(PORT, () => console.log('Server running on PORT' + PORT))
 
