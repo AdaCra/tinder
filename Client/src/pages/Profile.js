@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Nav from "../components/Nav";
+import { useCookies } from 'react-cookie'
 
-const OnBoarding = () => {
+
+
+const Profile = () => {
+  const [ cookies, setCookie, removeCookie] = useCookies(null)
   const [formData, setFormData] = useState({
-    user_id: "",
     first_name: "",
     dob_day: "",
     dob_month: "",
@@ -38,7 +41,7 @@ const OnBoarding = () => {
         showModal={false}
         setIsSignUp={false}
       />
-      <div className="onboarding">
+      <div className="profile">
         <h2>CREATE AN ACCOUNT</h2>
 
         <form onSubmit={handleSubmit}>
@@ -184,8 +187,7 @@ const OnBoarding = () => {
               required={true}
             />
             <div className="photo-container">
-              {formData.url && (
-                <img src={formData.url} alt="profile pic preview" />
+              {formData.url && (<img src={formData.url} alt="profile pic preview" />
               )}
             </div>
           </section>
@@ -195,4 +197,4 @@ const OnBoarding = () => {
   );
 };
 
-export default OnBoarding;
+export default Profile;
