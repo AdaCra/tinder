@@ -212,11 +212,11 @@ nav .logo-container .logo{
     background-color: rgb(226, 115, 155);
 }
 
-.profile form input[type="checkbox"]{
+.onboarding form input[type="checkbox"]{
     align-self: baseline;
 }
 
-.profile form .photo-container img{
+.onboarding form .photo-container img{
     width: 100%
 }
 /* ↑↑↑ ---- ON BOARDING ---- ↑↑↑ */
@@ -288,6 +288,7 @@ nav .logo-container .logo{
 .options-container{
     display: flex;
     justify-content: space-around;
+    background-color: rgb(255, 255, 255);
 }
 
 .chat-container .option {
@@ -331,7 +332,7 @@ nav .logo-container .logo{
 .chat-display,
 .matches-display {
     padding: 20px;
-    height: 60vh;
+    height: 31vh;
     overflow-y: auto;
 }
 /* ↑↑↑ --- CHAT  DISPLAY --- ↑↑↑ */
@@ -343,5 +344,6 @@ nav .logo-container .logo{
     padding: 20px;
     display: flex;
     flex-direction: column;
+    background-color: rgb(245, 245, 245);
 }
 /* ↑↑↑ ---- CHAT  INPUT ---- ↑↑↑ */

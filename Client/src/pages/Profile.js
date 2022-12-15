@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [ cookies, setCookie, removeCookie] = useCookies(null)
+  
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
     first_name: "",
@@ -27,7 +28,6 @@ const handleSubmit = async (e) => {
   e.preventDefault()
     try {
       const response = await axios.put('http://localhost:8000/user', {formData})
-      console.log(response)
       const success = response.status === 200
       if (success) navigate('/dashboard')
     } catch (err) {
@@ -171,7 +171,7 @@ const handleSubmit = async (e) => {
                 id="everyone-gender-interest"
                 type="radio"
                 name="gender_interest"
-                value="everyone"
+                value="more"
                 onChange={handleChange}
                 checked={formData.gender_interest === "everyone"}
               />
