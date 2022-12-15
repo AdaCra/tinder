@@ -56,7 +56,7 @@ export default function AdminCms() {
         return(
             <>
               <h1>AdminCms Page</h1>
-              <p>Lodding...</p>
+              <p>Loading...</p>
             </>
             );
     }
