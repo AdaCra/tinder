@@ -10,12 +10,16 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
     first_name: "",
+    surname: "",
     dob_day: "",
     dob_month: "",
     dob_year: "",
-    show_gender: false,
-    gender_identity: "man",
-    gender_interest: "woman",
+    address_number: "",
+    address_street: "",
+    address_city: "",
+    address_post_code: "",
+    request_precheck: false,
+    pet_interest: "cat",
     url: "",
     about: "",
     matches: [],
@@ -61,7 +65,7 @@ const handleSubmit = async (e) => {
 
         <form onSubmit={handleSubmit}>
           <section>
-            <label htmlFor="first_name">First Name</label>
+            <label htmlFor="first_name">Name</label>
             <input
               id="first_name"
               type="text"
@@ -71,6 +75,16 @@ const handleSubmit = async (e) => {
               value={formData.first_name}
               onChange={handleChange}
             />
+            <input
+              id="surname"
+              type="text"
+              name="surname"
+              placeholder="Surname"
+              required={true}
+              value={formData.first_name}
+              onChange={handleChange}
+            />
+            
 
             <label>Birthday</label>
             <div className="multiple-input-container">
@@ -83,7 +97,6 @@ const handleSubmit = async (e) => {
                 value={formData.dob_day}
                 onChange={handleChange}
               />
-
               <input
                 id="dob_month"
                 type="number"
@@ -93,7 +106,6 @@ const handleSubmit = async (e) => {
                 value={formData.dob_month}
                 onChange={handleChange}
               />
-
               <input
                 id="dob_year"
                 type="number"
@@ -105,59 +117,75 @@ const handleSubmit = async (e) => {
               />
             </div>
 
-            <label>Gender</label>
-            <div className="multiple-input-container">
+            <label>Address</label>
+            <div className="address-input-container">
+              <div>
+                <input
+                  id="address_number"
+                  type="number"
+                  name="address_number"
+                  placeholder="#"
+                  required={true}
+                  value={formData.address_number}
+                  onChange={handleChange}
+                />
+                <input
+                  id="address_street"
+                  type="text"
+                  name="address_street"
+                  placeholder="Street Name"
+                  required={true}
+                  value={formData.address_street}
+                  onChange={handleChange}
+                />
+              </div>
               <input
-                id="man-gender-identity"
-                type="radio"
-                name="gender_identity"
-                value="man"
+                id="address_city"
+                type="text"
+                name="address_city"
+                placeholder="City"
+                required={true}
+                value={formData.address_city}
                 onChange={handleChange}
-                checked={formData.gender_identity === "man"}
               />
-              <label htmlFor="man-gender-identity">Man</label>
               <input
-                id="woman-gender-identity"
-                type="radio"
-                name="gender_identity"
-                value="woman"
+                id="address_post_code"
+                type="number"
+                name="address_post_code"
+                placeholder="Code"
+                required={true}
+                value={formData.address_post_code}
                 onChange={handleChange}
-                checked={formData.gender_identity === "woman"}
               />
-              <label htmlFor="woman-gender-identity">Woman</label>
-              <input
-                id="more-gender-identity"
-                type="radio"
-                name="gender_identity"
-                value="more"
-                onChange={handleChange}
-                checked={formData.gender_identity === "more"}
-              />
-              <label htmlFor="more-gender-identity">More</label>
             </div>
 
-            <label htmlFor="show-gender">Show Gender on my Profile</label>
+            <label htmlFor="request_precheck">Request Home Precheck 
+              <span className="hover-text">🛈
+                <span className="tooltip-text" id="right">Prechecks speed up the adoption process. We will contact you to setup a suitable date.
+                </span>
+              </span>
+            </label>
+            
 
             <input
-              id="show-gender"
+              id="request_precheck"
               type="checkbox"
-              name="show_gender"
+              name="request_precheck"
               onChange={handleChange}
-              checked={formData.show_gender}
+              checked={formData.request_precheck}
             />
 
-            <label>Show Me</label>
+            <label>I want to adopt</label>
 
             <div className="multiple-input-container">
               <input
                 id="man-gender-interest"
                 type="radio"
                 name="gender_interest"
-                value="man"
+                value={formData.gender_interest === "man"}
                 onChange={handleChange}
-                checked={formData.gender_interest === "man"}
               />
-              <label htmlFor="man-gender-interest">Man</label>
+              <label htmlFor="man-gender-interest">Cats</label>
               <input
                 id="woman-gender-interest"
                 type="radio"
