@@ -18,6 +18,23 @@ h2 {
     font-size: 98px;
     color: rgba(255, 255, 255);
 }
+
+.hidden-btn {
+    visibility: hidden;
+}
+
+.home-button {
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    font-size: 15px;
+    background: linear-gradient(45deg, rgb(32, 172, 54), rgb(128,33,184));
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    margin-bottom: 10px;
+    width: 150px;
+}
+
 .primary-button {
     color: rgb(255, 255, 255);
     text-transform: uppercase;
@@ -120,9 +137,12 @@ nav .logo-container .logo{
     padding: 40px;
 }
 
-.auth-modal .close-icon {
+.auth-modal .close-btn {
     float: right;
     cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    height: 20px;
 }
 
 .auth-modal form {
@@ -179,7 +199,23 @@ nav .logo-container .logo{
     overflow: hidden;
     vertical-align: middle;
     border-radius: 50%;
+    border: 2px solid rgb(128, 33, 184);
     text-align: center;
+}
+
+.profile form #pic-file {
+    display: none;
+}
+
+.profile form #pic-upload-button{
+    height: 40px;
+    width: 200px;
+    position: absolute;
+    text-align: center;
+    margin-top: 175px;
+    color: rgb(128, 33, 184);
+    font-style: italic;
+
 }
 /* ---- */
 
@@ -190,6 +226,7 @@ nav .logo-container .logo{
     font-size: 15px;
     border: solid 2px rgb(185, 185, 185);
     border-radius: 10px
+    
 }
 
 .profile form label {

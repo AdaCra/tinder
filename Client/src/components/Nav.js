@@ -1,20 +1,20 @@
 import whiteLogo from "../images/finder_logo_white.png";
 import colorLogo from "../images/color-logo-finder.png";
 
-const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
+const Nav = ({ authToken, minimal, setShowModal, showModal, setuserSignUp }) => {
   const handleClick = () => {
     setShowModal(true);
-    setIsSignUp(false);
+    setuserSignUp(false);
   };
 
   return (
     <nav>
       <div className="logo-container">
-        <img
+      <a href="/"><img
           className="logo"
           src={minimal ? colorLogo : whiteLogo}
           alt="logo"
-        />
+        /></a>
       </div>
       {!authToken && !minimal && (
         <button

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 
-const AuthModal = ({ setShowModal,  isSignUp }) => {
+const AuthModal = ({ setShowModal,  userSignUp }) => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState(null)
@@ -24,19 +24,19 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
         e.preventDefault()
 
         try {
-            if (isSignUp && (password !== confirmPassword)) {
+            if (userSignUp && (password !== confirmPassword)) {
                 setError('Passwords need to match!')
                 return
             }
 
-            const response = await axios.post(`http://localhost:8000/${isSignUp ? 'signup' : 'login'}`, { email, password })
+            const response = await axios.post(`http://localhost:8000/${userSignUp ? 'signup' : 'login'}`, { email, password })
             
             setCookie('AuthToken', response.data.token)
             setCookie('UserId', response.data.userId)
 
             const success = response.status === 201
-            if (success && isSignUp) navigate ('/profile')
-            if (success && !isSignUp) navigate ('/dashboard')
+            if (success && userSignUp) navigate ('/profile')
+            if (success && !userSignUp) navigate ('/dashboard')
 
             window.location.reload()
 
@@ -48,9 +48,9 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
 
     return (
         <div className="auth-modal">
-            <div className="close-icon" onClick={handleClick}>ⓧ</div>
+            <button className="close-btn" onClick={handleClick}>&times;</button>
 
-            <h2>{isSignUp ? 'CREATE ACCOUNT': 'LOG IN'}</h2>
+            <h2>{userSignUp ? 'CREATE ACCOUNT': 'LOG IN'}</h2>
             <p>By clicking Log In, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy.</p>
             <form onSubmit={handleSubmit}>
                 <input
@@ -69,7 +69,7 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
                     required={true}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {isSignUp && <input
+                {userSignUp && <input
                     type="password"
                     id="password-check"
                     name="password-check"

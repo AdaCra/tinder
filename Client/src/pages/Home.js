@@ -5,7 +5,7 @@ import {useCookies} from "react-cookie"
 
 const Home = () => {
     const [showModal, setShowModal] = useState(false)
-    const [isSignUp, setIsSignUp] = useState(true)
+    const [userSignUp, setuserSignUp] = useState(true)
     const [cookies, setCookie, removeCookie] = useCookies(['user'])
     const authToken = cookies.AuthToken
 
@@ -17,7 +17,7 @@ const Home = () => {
             return
         }
         setShowModal(true)
-        setIsSignUp(true)
+        setuserSignUp(true)
     }
 
     return (
@@ -27,17 +27,29 @@ const Home = () => {
                 minimal={false}
                 setShowModal={setShowModal}
                 showModal={showModal}
-                setIsSignUp={setIsSignUp}
+                setuserSignUp={setuserSignUp}
             />
             <div className="home">
                 <h1 className="primary-title">Swipe Right®</h1>
-                <button className="primary-button" onClick={handleClick}>
+                <button className="home-button" onClick={handleClick}>
                     {authToken ? 'Signout' : 'Create Account'}
                 </button>
+                { authToken && 
+                        <>
+                <br/>
+                    <button className="home-button" onClick={handleClick}>
+                    Profile
+                </button>
+                <br/>
+                <button className="home-button" onClick={handleClick}>
+                    Pets
+                </button>
+                </>
+                }
 
 
                 {showModal && (
-                    <AuthModal setShowModal={setShowModal} isSignUp={isSignUp}/>
+                    <AuthModal setShowModal={setShowModal} userSignUp={userSignUp}/>
                 )}
             </div>
         </div>

@@ -20,7 +20,7 @@ const Profile = () => {
     address_post_code: "",
     request_precheck: false,
     pet_interest: "cat",
-    url: "",
+    pic_file: "",
     about: "",
     matches: [],
   });
@@ -51,13 +51,14 @@ const handleSubmit = async (e) => {
     }));
   };
 
+  
   return (
     <>
       <Nav
         minimal={true}
         setShowModal={() => {}}
         showModal={false}
-        setIsSignUp={false}
+        setuserSignUp={false}
       />
       <div className="profile">
         <h2>Fill out your profile</h2>
@@ -66,17 +67,17 @@ const handleSubmit = async (e) => {
           <section>
             <div className="photo-upload-container">
               <div className="photo-container">
-                {formData.url ? <img  src={formData.url} alt="profile pic preview" />
+                {formData.url ? <img  src={formData.url} alt="avatar" />
                 : <img src={figureHead}/>} 
               </div>
-              <label htmlFor="url">Profile Photo</label>
               <input
-                type="url"
-                name="url"
-                id="url"
+                id="pic-file"
+                type="file"
+                name="pic_file"
                 onChange={handleChange}
                 required={true}
               />
+              <label htmlFor="pic-file" id="pic-upload-button">Upload</label>
               </div>
 
             <label htmlFor="first-name">Name</label>
@@ -107,7 +108,7 @@ const handleSubmit = async (e) => {
                 id="dob_month"
                 type="number"
                 name="dob_month"
-                placeholder="00"
+                placeholder="MM"
                 min = "1"
                 max = "12"
                 required={true}
@@ -118,7 +119,7 @@ const handleSubmit = async (e) => {
                 id="dob_year"
                 type="number"
                 name="dob_year"
-                placeholder="0000"
+                placeholder="YYYY"
                 min = "1952"
                 max = "2004"
                 required={true}
