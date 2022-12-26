@@ -37,16 +37,19 @@ const Home = () => {
                 { authToken && 
                         <>
                 <br/>
-                    <button className="home-button" onClick={handleClick}>
+                <a href="/profile">
+                    <button className="home-button">
                     Profile
-                </button>
+                    </button>
+                </a>
                 <br/>
-                <button className="home-button" onClick={handleClick}>
-                    Pets
-                </button>
+                <a href="/dashboard">
+                    <button className="home-button">
+                    Dashboard
+                    </button>
+                </a>
                 </>
                 }
-
 
                 {showModal && (
                     <AuthModal setShowModal={setShowModal} userSignUp={userSignUp}/>

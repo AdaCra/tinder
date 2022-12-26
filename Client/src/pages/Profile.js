@@ -12,6 +12,7 @@ const Profile = () => {
     user_id: cookies.UserId,
     first_name: "",
     surname: "",
+    dob_day: "",
     dob_month: "",
     dob_year: "",
     address_number: "",
@@ -19,8 +20,8 @@ const Profile = () => {
     address_city: "",
     address_post_code: "",
     request_precheck: false,
-    pet_interest: "cat",
-    pic_file: "",
+    pet_interest: "",
+    url: "",
     about: "",
     matches: [],
   });
@@ -51,7 +52,21 @@ const handleSubmit = async (e) => {
     }));
   };
 
+  const maxDayInMonth = (month, year) =>{    
+    if(month === 2 && year % 4 !== 0){
+      return 28
+    } else if(month === 2 && year % 4 === 0){
+      return 29
+    } else if(month === 4 || month === 6 || month === 9 || month === 11){
+      return 30
+    } else { 
+      return 31
+    }
+  }
   
+  const minYear = new Date().getFullYear() - 100
+  const maxYear = new Date().getFullYear() - 18
+
   return (
     <>
       <Nav
@@ -71,13 +86,12 @@ const handleSubmit = async (e) => {
                 : <img src={figureHead}/>} 
               </div>
               <input
-                id="pic-file"
-                type="file"
-                name="pic_file"
+                id="url"
+                type="url"
+                name="url"
                 onChange={handleChange}
-                required={true}
               />
-              <label htmlFor="pic-file" id="pic-upload-button">Upload</label>
+              <label htmlFor="url" id="pic-upload-button">Upload</label>
               </div>
 
             <label htmlFor="first-name">Name</label>
@@ -105,6 +119,17 @@ const handleSubmit = async (e) => {
             <label>Birthday</label>
             <div className="multiple-input-container">
               <input
+                id="dob_day"
+                type="number"
+                name="dob_day"
+                placeholder="DD"
+                min = "1"
+                max = {maxDayInMonth(formData.dob_month, formData.dob_year)}
+                required={true}
+                value={formData.dob_day}
+                onChange={handleChange}
+              />
+              <input
                 id="dob_month"
                 type="number"
                 name="dob_month"
@@ -120,8 +145,8 @@ const handleSubmit = async (e) => {
                 type="number"
                 name="dob_year"
                 placeholder="YYYY"
-                min = "1952"
-                max = "2004"
+                min = {minYear}
+                max = {maxYear}
                 required={true}
                 value={formData.dob_year}
                 onChange={handleChange}
@@ -133,7 +158,7 @@ const handleSubmit = async (e) => {
               <div className="street-address-container">
                 <input
                   id="address_number"
-                  type="number"
+                  type="text"
                   name="address_number"
                   placeholder="#"
                   required={true}

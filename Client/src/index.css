@@ -33,19 +33,10 @@ h2 {
     border: none;
     margin-bottom: 10px;
     width: 150px;
+    cursor: pointer;
 }
 
-.primary-button {
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(32, 172, 54), rgb(128,33,184));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-}
-
-.primary-button:hover {
+.home-button:hover {
     background: linear-gradient(45deg, rgb(128,33,184), rgb(32, 172, 54));
 }
 
@@ -138,11 +129,14 @@ nav .logo-container .logo{
 }
 
 .auth-modal .close-btn {
-    float: right;
     cursor: pointer;
-    background-color: transparent;
+    position: absolute;
+    right: 10px;
+    top: 10px;
     border: 0;
-    height: 20px;
+    background-color: transparent;
+    line-height: 1;
+    font-size: 25px;
 }
 
 .auth-modal form {
@@ -203,7 +197,7 @@ nav .logo-container .logo{
     text-align: center;
 }
 
-.profile form #pic-file {
+.profile form #url {
     display: none;
 }
 

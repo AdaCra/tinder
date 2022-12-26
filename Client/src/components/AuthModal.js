@@ -49,7 +49,7 @@ const AuthModal = ({ setShowModal,  userSignUp }) => {
     return (
         <div className="auth-modal">
             <button className="close-btn" onClick={handleClick}>&times;</button>
-
+        
             <h2>{userSignUp ? 'CREATE ACCOUNT': 'LOG IN'}</h2>
             <p>By clicking Log In, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy.</p>
             <form onSubmit={handleSubmit}>
