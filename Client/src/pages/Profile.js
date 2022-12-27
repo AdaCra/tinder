@@ -21,7 +21,7 @@ const Profile = () => {
     address_post_code: "",
     request_precheck: false,
     pet_interest: "",
-    url: "",
+    avatar: "",
     about: "",
     matches: [],
   });
@@ -82,16 +82,16 @@ const handleSubmit = async (e) => {
           <section>
             <div className="photo-upload-container">
               <div className="photo-container">
-                {formData.url ? <img  src={formData.url} alt="avatar" />
+                {formData.url ? <img  src={formData.avatar} alt="avatar" />
                 : <img src={figureHead}/>} 
               </div>
               <input
-                id="url"
-                type="url"
-                name="url"
+                id="avatar"
+                type="file"
+                name="avatar"
                 onChange={handleChange}
               />
-              <label htmlFor="url" id="pic-upload-button">Upload</label>
+              <label htmlFor="avatar" id="pic-upload-button">Upload</label>
               </div>
 
             <label htmlFor="first-name">Name</label>
@@ -186,7 +186,7 @@ const handleSubmit = async (e) => {
               />
               <input
                 id="address_post_code"
-                type="number"
+                type="text"
                 name="address_post_code"
                 placeholder="Code"
                 required={true}
@@ -209,7 +209,26 @@ const handleSubmit = async (e) => {
               </span>
             </label>
 
-            <label>I want to adopt</label>
+            <label className="adopt">I want to 
+              <div className="inline-multiple-input-container"> 
+                <input
+                  id="i-want-to-adopt"
+                  type="radio"
+                  name="i-want-to"
+                  value="adopt"
+                  checked={formData.i_want_to === "adopt"}
+                  onChange={handleChange}     />
+                  <label htmlFor="i-want-to">Adopt</label>
+                <input
+                  id="i-want-to-foster"
+                  type="radio"
+                  name="i-want-to"
+                  value="foster"
+                  checked={formData.i_want_to === "foster"}
+                  onChange={handleChange}     />
+                  <label htmlFor="i-want-to">Foster</label>
+              </div> a pet.
+            </label>
 
             <div className="multiple-input-container">
               <input

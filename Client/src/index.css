@@ -193,8 +193,9 @@ nav .logo-container .logo{
     overflow: hidden;
     vertical-align: middle;
     border-radius: 50%;
-    border: 2px solid rgb(128, 33, 184);
+    border: 3px solid rgb(128, 33, 184);
     text-align: center;
+    filter: drop-shadow(2px 2px 5px rgb(185, 185, 185));
 }
 
 .profile form #url {
@@ -261,6 +262,12 @@ nav .logo-container .logo{
 .profile form .multiple-input-container{
     display: flex;
     flex-direction: row;
+}
+
+#i_want_to{
+    margin: 0 10px 0 10px;
+    padding: 5px;
+    border: 3px solid rgb(128, 33, 184);
 }
 
 /* tooltip */
