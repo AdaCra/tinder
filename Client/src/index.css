@@ -24,10 +24,10 @@ h2 {
 }
 
 .home-button {
-    color: rgb(255, 255, 255);
+    color: rgb(110, 110, 110);
     text-transform: uppercase;
     font-size: 15px;
-    background: linear-gradient(45deg, rgb(32, 172, 54), rgb(128,33,184));
+    background: rgb(255, 255, 255);
     padding: 12px 30px;
     border-radius: 30px;
     border: none;
@@ -37,7 +37,8 @@ h2 {
 }
 
 .home-button:hover {
-    background: linear-gradient(45deg, rgb(128,33,184), rgb(32, 172, 54));
+    color: rgb(128,33,184);
+    background-color: rgb(32, 172, 54);
 }
 
 .secondary-button {
@@ -154,221 +155,7 @@ nav .logo-container .logo{
 
 
 
-/* ↓↓↓ ---- ON BOARDING ---- ↓↓↓ */
 
-/* general */
-.profile {
-    border-top: solid 1px rgb(181, 211, 183);
-    background-color: rgb(243, 253, 246);
-}
-
-.profile form{
-    display: flex;
-    justify-content: center;
-}
-
-.profile form section{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 35%;
-    text-align: start;
-}
-/* profile photo*/
-.profile form .photo-upload-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.profile form .photo-container{
-    height: 200px;
-    width: 200px;
-    box-shadow: 0 0 0 1px var(--color-avatar-border);
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-shrink: 0;
-    line-height: 1;
-    overflow: hidden;
-    vertical-align: middle;
-    border-radius: 50%;
-    border: 3px solid rgb(128, 33, 184);
-    text-align: center;
-    filter: drop-shadow(2px 2px 5px rgb(185, 185, 185));
-}
-
-.profile form #url {
-    display: none;
-}
-
-.profile form #pic-upload-button{
-    height: 40px;
-    width: 200px;
-    position: absolute;
-    text-align: center;
-    margin-top: 175px;
-    color: rgb(128, 33, 184);
-    font-style: italic;
-
-}
-/* ---- */
-
-
-.profile form input {
-    padding: 15px 15px;
-    margin: 10px 0px;
-    font-size: 15px;
-    border: solid 2px rgb(185, 185, 185);
-    border-radius: 10px
-    
-}
-
-.profile form label {
-    margin: 10px 0px;
-} 
-
-.profile form .name-input{
-    display: flex;
-    flex-direction: row;
-}
-
-.profile form .name-input input{
-    width: 50%;
-}
-
-.profile form .name-input #first-name{
-    margin-right: 10px;
-}
-
-
-.profile form .address-input-container{
-    display: flex;
-    flex-direction: column;
-}
-
-.profile form .address-input-container .street-address-container{
-    display: flex;
-}
-
-.profile form .address-input-container #address_number{
-    margin-right: 10px;
-}
-
-.profile form .address-input-container #address_street{
-    width: 100%;
-}
-
-.profile form .multiple-input-container{
-    display: flex;
-    flex-direction: row;
-}
-
-#i_want_to{
-    margin: 0 10px 0 10px;
-    padding: 5px;
-    border: 3px solid rgb(128, 33, 184);
-}
-
-/* tooltip */
-    .profile form .tooltip-text {
-        visibility: hidden;
-        position: absolute;
-        z-index: 1;
-        width: 100px;
-        color: rgb(255, 255, 255);
-        font-size: 0.6em;
-        background-color: rgb(128, 33, 184);
-        border-bottom: 3px solid rgb(32, 172, 54);
-        border-right: 3px solid rgb(32, 172, 54);
-        border-radius: 10px;
-        padding: 10px 15px 10px 15px;
-        margin-right: 10px;
-
-    }
-
-    .profile form .tooltip-text::before {
-        content: "";
-        position: absolute;
-        transform: rotate(45deg);
-        background-color: rgb(128, 33, 184);
-        padding: 5px;
-        z-index: 2;
-    }
-    
-    .profile form .hover-text:hover .tooltip-text {
-        visibility: visible;
-    }
-
-    .profile form .hover-text {
-        position: relative;
-        display: inline-block;
-        margin: 0px 0px -10px 20px;
-        font-size: 1.4em;
-        font-style: bold;
-        color: rgb(128, 33, 184);
-    }
-
-    .profile form #right {
-        top: -35px;
-        left: 130%;
-    }
-    
-    .profile form #right::before {
-        top: 35%;
-        left: -2%;
-    }
-/* ------ */
-
-.profile form input[type="checkbox"]{
-    margin-left: 20px;
-    align-self: baseline;
-}
-
-.profile form input::-webkit-inner-spin-button,
-.profile form input::-webkit-outer-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.profile form .multiple-input-container input{
-    margin-right: 10px;   
-}
-
-.profile form .multiple-input-container label{
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-    border: solid 2px rgb(185, 185, 185);
-    border-radius: 10px;
-    transition: all 0.3s;
-    margin-right: 10px;
-}
-
-.profile form input[type="radio"]{
-    display: none;
-}
-
-.profile form input[type=number] {
-    width: 16%;
-}
-
-.profile form input[type="radio"]:checked + label {
-    border: solid 3px  rgb(32, 172, 54);
-    background-color: rgb(255, 255, 255);
-}
-
-.profile form input[type="submit"]:hover {
-    background-color: rgb(235, 235, 235);
-}
-
-.profile form input[type="submit"]:active {
-    background-color: rgb(226, 115, 155);
-}
-
-.onboarding form input[type="checkbox"]{
-    align-self: baseline;
-}
-/* ↑↑↑ ---- ON BOARDING ---- ↑↑↑ */
 
 
 

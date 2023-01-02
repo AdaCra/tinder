@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Nav from "../components/Nav";
 import { useCookies } from 'react-cookie'
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FileBase64 from 'react-file-base64'
+import axios from "axios";
+import Nav from "../components/Nav";
 import figureHead from "../images/dummy-profile-pic-300x300.png"
 
 const Profile = () => {
@@ -40,21 +41,22 @@ const handleSubmit = async (e) => {
     }
   };
 
-
   const handleChange = (e) => {
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    e.target.type === "checkbox" ? e.target.checked : e.target.value;
     const name = e.target.name;    
-
+    
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
+  
 
+  const [ maxDay, setMaxDay] = useState(null)
   const maxDayInMonth = (month, year) =>{    
     if(month === 2 && year % 4 !== 0){
-      return 28
+      setMaxDay = 28
     } else if(month === 2 && year % 4 === 0){
       return 29
     } else if(month === 4 || month === 6 || month === 9 || month === 11){
@@ -82,43 +84,45 @@ const handleSubmit = async (e) => {
           <section>
             <div className="photo-upload-container">
               <div className="photo-container">
-                {formData.url ? <img  src={formData.avatar} alt="avatar" />
+                {formData.avatar ? <img  src={formData.avatar} alt="avatar" />
                 : <img src={figureHead}/>} 
               </div>
+              </div>
+            <label htmlFor="avatar" id="pic-upload-button">Avatar</label>
               <input
                 id="avatar"
-                type="file"
+                type="url"
                 name="avatar"
+                placeholder="Avatar URL"
                 onChange={handleChange}
               />
-              <label htmlFor="avatar" id="pic-upload-button">Upload</label>
-              </div>
 
             <label htmlFor="first-name">Name</label>
-            <div className="name-input">
-            <input
-              id="first-name"
-              type="text"
-              name="first_name"
-              placeholder="First Name"
-              required={true}
-              value={formData.first_name}
-              onChange={handleChange}
-            />
-            <input
-              id="surname"
-              type="text"
-              name="surname"
-              placeholder="Surname"
-              required={true}
-              value={formData.surname}
-              onChange={handleChange}
-            />
+            <div className="name-input-container">
+              <input
+                id="first-name"
+                type="text"
+                name="first_name"
+                placeholder="First Name"
+                required={true}
+                value={formData.first_name}
+                onChange={handleChange}
+              />
+              <input
+                id="surname"
+                type="text"
+                name="surname"
+                placeholder="Surname"
+                required={true}
+                value={formData.surname}
+                onChange={handleChange}
+              />
             </div>
 
             <label>Birthday</label>
             <div className="multiple-input-container">
               <input
+                className="number-input"
                 id="dob_day"
                 type="number"
                 name="dob_day"
@@ -130,6 +134,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
               />
               <input
+                className="number-input"
                 id="dob_month"
                 type="number"
                 name="dob_month"
@@ -141,6 +146,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
               />
               <input
+                className="number-input"
                 id="dob_year"
                 type="number"
                 name="dob_year"
@@ -157,6 +163,7 @@ const handleSubmit = async (e) => {
             <div className="address-input-container">
               <div className="street-address-container">
                 <input
+                  className="number-input"
                   id="address_number"
                   type="text"
                   name="address_number"
@@ -185,6 +192,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
               />
               <input
+                className="number-input"
                 id="address_post_code"
                 type="text"
                 name="address_post_code"
@@ -195,39 +203,45 @@ const handleSubmit = async (e) => {
               />
             </div>
 
-            <label htmlFor="request-precheck">Request Home Precheck 
-              <input
-                id="request-precheck"
-                type="checkbox"
-                name="request_precheck"
-                onChange={handleChange}
-                checked={formData.request_precheck}
-              />
-              <span className="hover-text">🛈
-                <span className="tooltip-text" id="right">Prechecks speed up the adoption process. We will contact you to setup a suitable date.
+            <div className="request-precheck-container">
+              <label htmlFor="request-precheck">Request Home Precheck 
+                <input
+                  id="request-precheck"
+                  type="checkbox"
+                  name="request_precheck"
+                  onChange={handleChange}
+                  checked={formData.request_precheck}
+                />
+                <span className="hover-text">🛈
+                  <span className="tooltip-text" id="right">Prechecks speed up the adoption process. We will contact you to setup a suitable date.
+                  </span>
                 </span>
-              </span>
-            </label>
+              </label>
+            </div>
 
-            <label className="adopt">I want to 
-              <div className="inline-multiple-input-container"> 
+            <label className="adopt-or-foster">I want to 
+              <div className="multiple-input-container">
                 <input
-                  id="i-want-to-adopt"
-                  type="radio"
-                  name="i-want-to"
-                  value="adopt"
-                  checked={formData.i_want_to === "adopt"}
-                  onChange={handleChange}     />
-                  <label htmlFor="i-want-to">Adopt</label>
+                id="wants-to-adopt"
+                type="radio"
+                name="wants_to"
+                value="adopt"
+                checked={formData.wants_to === "adopt"}
+                onChange={handleChange}     />
+                <label htmlFor="wants-to-adopt">Adopt</label>
+                
                 <input
-                  id="i-want-to-foster"
-                  type="radio"
-                  name="i-want-to"
-                  value="foster"
-                  checked={formData.i_want_to === "foster"}
-                  onChange={handleChange}     />
-                  <label htmlFor="i-want-to">Foster</label>
-              </div> a pet.
+                id="wants-to-foster"
+                type="radio"
+                name="wants_to"
+                value="dog"
+                checked={formData.wants_to === "foster"}
+                onChange={handleChange}     />
+                <label htmlFor="wants-to-foster">Foster</label>
+              
+              </div>
+              
+              a pet.
             </label>
 
             <div className="multiple-input-container">
