@@ -1,13 +1,15 @@
-require('dotenv').config()
 const express = require('express')
 const {MongoClient} = require('mongodb')
 const {v4: uuidv4} = require('uuid')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
+require('dotenv').config()
 
+// environment variable config
 const PORT = process.env.PORT
 const uri = process.env.URI
+
 
 const app = express()
 app.use(cors())
